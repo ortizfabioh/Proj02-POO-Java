@@ -34,6 +34,7 @@ public class programa extends javax.swing.JFrame {
         valor_para = new javax.swing.JTextField();
         seletor_de = new javax.swing.JComboBox<>();
         seletor_para = new javax.swing.JComboBox<>();
+        seletor_categoria = new javax.swing.JComboBox<>();
         menu = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         ajuda = new javax.swing.JMenu();
@@ -77,6 +78,10 @@ public class programa extends javax.swing.JFrame {
 
         seletor_para.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        seletor_categoria.setMaximumRowCount(10);
+        seletor_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Área", "Armazenamento de Dados", "Comprimento", "Frequência", "Líquido", "Massa", "Pressão", "Temperatura", "Tempo", "Velocidade" }));
+        seletor_categoria.setSelectedIndex(2);
+
         jMenu3.setText("File");
         menu.add(jMenu3);
 
@@ -90,7 +95,7 @@ public class programa extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_de, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label_para, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -100,14 +105,17 @@ public class programa extends javax.swing.JFrame {
                     .addComponent(valor_para, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(seletor_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(seletor_para, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(seletor_de, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(seletor_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_de, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(valor_de, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -117,7 +125,7 @@ public class programa extends javax.swing.JFrame {
                     .addComponent(label_para, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(valor_para, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(seletor_para, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         seletor_para.getAccessibleContext().setAccessibleName("");
@@ -175,6 +183,7 @@ public class programa extends javax.swing.JFrame {
     private javax.swing.JLabel label_de;
     private javax.swing.JLabel label_para;
     private javax.swing.JMenuBar menu;
+    private javax.swing.JComboBox<String> seletor_categoria;
     private javax.swing.JComboBox<String> seletor_de;
     private javax.swing.JComboBox<String> seletor_para;
     private javax.swing.JTextField valor_de;
