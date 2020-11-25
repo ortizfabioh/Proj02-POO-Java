@@ -1,19 +1,20 @@
 package Conversores;
 
 public enum TipoMedida {
-    AREA("area", "metro quadrado (m\\u33a1)"),
-    ARMAZENAMENTO("armazenamento", "byte (B)"),
-    COMPRIMENTO("comprimento", "metro (m)"),
-    FREQUENCIA("frequencia", "hertz (Hz)"),
+    AREA("Area", "metro quadrado (m\\u33a1)"),
+    ARMAZENAMENTO("Armazenamento", "byte (B)"),
+    COMPRIMENTO("Comprimento", "metro (m)"),
+    FREQUENCIA("Frequencia", "hertz (Hz)"),
     LIQUIDO("liquido", "litro (O)"),
     MASSA("massa", "quilograma (kg)"),
-    PRESSAO("pressao", "pascal (Pa)"),
-    TEMPERATURA("temperatura", "graus celsius (\\u00BAC)"),
-    TEMPO("tempo", "segundo (s)"),
-    VELOCIDADE("velocidade", "m/s");
+    PRESSAO("Pressao", "pascal (Pa)"),
+    TEMPERATURA("Temperatura", "graus celsius (\\u00BAC)"),
+    TEMPO("Tempo", "segundo (s)"),
+    VELOCIDADE("Velocidade", "m/s");
     
     private String tipo;
     private String unidadeBasica;
+   
     
     private TipoMedida(String tipo, String unidadeBasica) {
         this.tipo = tipo;

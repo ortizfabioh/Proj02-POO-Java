@@ -9,8 +9,8 @@ import Conversores.Massa;
 import Conversores.Pressao;
 import Conversores.Temperatura;
 import Conversores.Tempo;
+import Conversores.TipoMedida;
 import Conversores.Velocidade;
-import javax.swing.JComboBox;
 
 public class programa extends javax.swing.JFrame {
 
@@ -31,7 +31,7 @@ public class programa extends javax.swing.JFrame {
     Temperatura temperatura = new Temperatura();
     Tempo tempo = new Tempo();
     Velocidade velocidade = new Velocidade();
-    
+
     
     /**
      * Creates new form programa
@@ -40,6 +40,19 @@ public class programa extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         
+        seletor_categoria.setModel(new javax.swing.DefaultComboBoxModel(TipoMedida.values()));
+        
+        seletor_categoria.setSelectedIndex(2);
+        valor_de.setText("0.0");
+        valor_para.setText("0.0");
+        
+        valor = 1000;
+                
+        Double a = Comprimento.Quilometro.paraUnidadeBasica(Comprimento.Milimetro.deUnidadeBasica(valor));
+        
+        valorConvertido = a.toString();
+        
+        //valor_para.setText(valorConvertido);
     }
 
     /**
@@ -190,13 +203,10 @@ public class programa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void valor_deActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valor_deActionPerformed
-        
-        
         valor = Double.parseDouble(valor_de.getText());
     }//GEN-LAST:event_valor_deActionPerformed
     private void seletor_deActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seletor_deActionPerformed
-        String[] lista = {};
-        JComboBox seletor_de = new JComboBox(lista);
+
         
         converter_de = (String)seletor_de.getSelectedItem();
     }//GEN-LAST:event_seletor_deActionPerformed
