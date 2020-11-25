@@ -10,6 +10,7 @@ import Conversores.Pressao;
 import Conversores.Temperatura;
 import Conversores.Tempo;
 import Conversores.Velocidade;
+import javax.swing.JComboBox;
 
 public class programa extends javax.swing.JFrame {
 
@@ -19,6 +20,7 @@ public class programa extends javax.swing.JFrame {
     private String converter_para;
     private String valorConvertido;
 
+        
     Area area = new Area();
     Armazenamento armazenamento = new Armazenamento();
     Comprimento comprimento = new Comprimento();
@@ -29,14 +31,15 @@ public class programa extends javax.swing.JFrame {
     Temperatura temperatura = new Temperatura();
     Tempo tempo = new Tempo();
     Velocidade velocidade = new Velocidade();
-        
-
+    
     
     /**
      * Creates new form programa
      */
     public programa() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -48,7 +51,6 @@ public class programa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         label_de = new javax.swing.JLabel();
         label_para = new javax.swing.JLabel();
         valor_de = new javax.swing.JTextField();
@@ -56,12 +58,12 @@ public class programa extends javax.swing.JFrame {
         seletor_de = new javax.swing.JComboBox<>();
         seletor_para = new javax.swing.JComboBox<>();
         seletor_categoria = new javax.swing.JComboBox<>();
-        menu = new javax.swing.JMenuBar();
-        jMenu3 = new javax.swing.JMenu();
-        ajuda = new javax.swing.JMenu();
-
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+        menuBar = new javax.swing.JMenuBar();
+        menuFile = new javax.swing.JMenu();
+        menuItemSair = new javax.swing.JMenuItem();
+        menuAjuda = new javax.swing.JMenu();
+        menuItemAjuda = new javax.swing.JMenuItem();
+        menuItemSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Conversor de Medidas");
@@ -120,13 +122,29 @@ public class programa extends javax.swing.JFrame {
             }
         });
 
-        jMenu3.setText("File");
-        menu.add(jMenu3);
+        menuFile.setText("File");
 
-        ajuda.setText("Ajuda");
-        menu.add(ajuda);
+        menuItemSair.setText("Sair");
+        menuFile.add(menuItemSair);
 
-        setJMenuBar(menu);
+        menuBar.add(menuFile);
+
+        menuAjuda.setText("Ajuda");
+
+        menuItemAjuda.setText("Ajuda");
+        menuAjuda.add(menuItemAjuda);
+
+        menuItemSobre.setText("Sobre");
+        menuItemSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemSobreActionPerformed(evt);
+            }
+        });
+        menuAjuda.add(menuItemSobre);
+
+        menuBar.add(menuAjuda);
+
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,9 +190,14 @@ public class programa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void valor_deActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valor_deActionPerformed
+        
+        
         valor = Double.parseDouble(valor_de.getText());
     }//GEN-LAST:event_valor_deActionPerformed
     private void seletor_deActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seletor_deActionPerformed
+        String[] lista = {};
+        JComboBox seletor_de = new JComboBox(lista);
+        
         converter_de = (String)seletor_de.getSelectedItem();
     }//GEN-LAST:event_seletor_deActionPerformed
     private void seletor_paraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seletor_paraActionPerformed
@@ -186,6 +209,10 @@ public class programa extends javax.swing.JFrame {
     private void seletor_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seletor_categoriaActionPerformed
         categoria = (String)seletor_categoria.getSelectedItem();
     }//GEN-LAST:event_seletor_categoriaActionPerformed
+
+    private void menuItemSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSobreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuItemSobreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,12 +250,14 @@ public class programa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu ajuda;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JLabel label_de;
     private javax.swing.JLabel label_para;
-    private javax.swing.JMenuBar menu;
+    private javax.swing.JMenu menuAjuda;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu menuFile;
+    private javax.swing.JMenuItem menuItemAjuda;
+    private javax.swing.JMenuItem menuItemSair;
+    private javax.swing.JMenuItem menuItemSobre;
     private javax.swing.JComboBox<String> seletor_categoria;
     private javax.swing.JComboBox<String> seletor_de;
     private javax.swing.JComboBox<String> seletor_para;
