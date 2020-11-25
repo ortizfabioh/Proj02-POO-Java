@@ -1,6 +1,6 @@
 package Conversores;
 
-public class frequencia {
+public class Frequencia {
     /*Object[][] frequencia = {
         {"Hertz", "Hz", 1},
         {"Quilo-hertz", "kHz", 1000},

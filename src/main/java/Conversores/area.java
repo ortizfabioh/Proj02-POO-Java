@@ -1,6 +1,6 @@
 package Conversores;
 
-public class area {
+public class Area {
     /*Object[][] area = {
         {"Metro quadrado", "m²", 1},
         {"Quilômetro quadrado", "km²", 1000000},

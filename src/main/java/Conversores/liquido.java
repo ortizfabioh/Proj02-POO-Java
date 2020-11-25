@@ -1,6 +1,6 @@
 package Conversores;
 
-public class liquido {
+public class Liquido {
     /*Object[][] liquido = {
         {"Litro", "L", 1},
         {"Quilolitros", "kL", 1000},

@@ -1,16 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Programa;
 
-/**
- *
- * @author Fábio
- */
+import Conversores.Area;
+import Conversores.Armazenamento;
+import Conversores.Comprimento;
+import Conversores.Frequencia;
+import Conversores.Liquido;
+import Conversores.Massa;
+import Conversores.Pressao;
+import Conversores.Temperatura;
+import Conversores.Tempo;
+import Conversores.Velocidade;
+
 public class programa extends javax.swing.JFrame {
 
+    private double valor;
+    private String categoria;
+    private String converter_de;
+    private String converter_para;
+    private String valorConvertido;
+
+    Area area = new Area();
+    Armazenamento armazenamento = new Armazenamento();
+    Comprimento comprimento = new Comprimento();
+    Frequencia frequencia = new Frequencia();
+    Liquido liquido = new Liquido();
+    Massa massa = new Massa();
+    Pressao pressao = new Pressao();
+    Temperatura temperatura = new Temperatura();
+    Tempo tempo = new Tempo();
+    Velocidade velocidade = new Velocidade();
+        
+
+    
     /**
      * Creates new form programa
      */
@@ -43,6 +64,9 @@ public class programa extends javax.swing.JFrame {
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Conversor de Medidas");
+        setAlwaysOnTop(true);
+        setResizable(false);
 
         label_de.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         label_de.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -68,6 +92,11 @@ public class programa extends javax.swing.JFrame {
         valor_para.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         valor_para.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         valor_para.setName("valor_para"); // NOI18N
+        valor_para.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                valor_paraActionPerformed(evt);
+            }
+        });
 
         seletor_de.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         seletor_de.addActionListener(new java.awt.event.ActionListener() {
@@ -77,10 +106,19 @@ public class programa extends javax.swing.JFrame {
         });
 
         seletor_para.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        seletor_para.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seletor_paraActionPerformed(evt);
+            }
+        });
 
         seletor_categoria.setMaximumRowCount(10);
         seletor_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Área", "Armazenamento de Dados", "Comprimento", "Frequência", "Líquido", "Massa", "Pressão", "Temperatura", "Tempo", "Velocidade" }));
-        seletor_categoria.setSelectedIndex(2);
+        seletor_categoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seletor_categoriaActionPerformed(evt);
+            }
+        });
 
         jMenu3.setText("File");
         menu.add(jMenu3);
@@ -134,12 +172,20 @@ public class programa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void valor_deActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valor_deActionPerformed
-        // TODO add your handling code here:
+        valor = Double.parseDouble(valor_de.getText());
     }//GEN-LAST:event_valor_deActionPerformed
-
     private void seletor_deActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seletor_deActionPerformed
-        // TODO add your handling code here:
+        converter_de = (String)seletor_de.getSelectedItem();
     }//GEN-LAST:event_seletor_deActionPerformed
+    private void seletor_paraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seletor_paraActionPerformed
+        converter_para = (String)seletor_para.getSelectedItem();
+    }//GEN-LAST:event_seletor_paraActionPerformed
+    private void valor_paraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valor_paraActionPerformed
+                valor_para.setText(valorConvertido);
+    }//GEN-LAST:event_valor_paraActionPerformed
+    private void seletor_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seletor_categoriaActionPerformed
+        categoria = (String)seletor_categoria.getSelectedItem();
+    }//GEN-LAST:event_seletor_categoriaActionPerformed
 
     /**
      * @param args the command line arguments

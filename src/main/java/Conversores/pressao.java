@@ -9,6 +9,6 @@ package Conversores;
  *
  * @author Fábio
  */
-public class pressao {
+public class Pressao {
     
 }

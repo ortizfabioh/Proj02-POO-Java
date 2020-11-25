@@ -9,6 +9,6 @@ package Conversores;
  *
  * @author Fábio
  */
-public class velocidade {
+public class Velocidade {
     
 }
