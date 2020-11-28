@@ -1,58 +1,137 @@
 package Programa;
 
-import Conversores.Area;
-import Conversores.Armazenamento;
-import Conversores.Comprimento;
-import Conversores.Frequencia;
-import Conversores.Liquido;
-import Conversores.Massa;
-import Conversores.Pressao;
-import Conversores.Temperatura;
-import Conversores.Tempo;
-import Conversores.TipoMedida;
-import Conversores.Velocidade;
+import Conversores.CategoriaArea;
+import Conversores.CategoriaComprimento;
+import Conversores.CategoriaLiquido;
+import Conversores.CategoriaMassa;
+import Conversores.Centi;
+import Conversores.Deca;
+import Conversores.Deci;
+import Conversores.Hecto;
+import Conversores.Mili;
+import Conversores.Quilo;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class programa extends javax.swing.JFrame {
+    ArrayList<String> nome;
 
-    private double valor;
-    private String categoria;
-    private String converter_de;
-    private String converter_para;
-    private String valorConvertido;
+    public void popularSeletor_de(ArrayList<String> nome) {
+        for(int i=0; i<nome.size(); i++) {
+            seletor_de.addItem(nome.get(i));
+        }
+    }
 
+    public void popularSeletor_para(ArrayList<String> nome) {
+        for(int i=0;i<nome.size(); i++) {
+            seletor_para.addItem(nome.get(i));
+
+        }
+    }
+
+    public void popularSeletores(int categoria) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        seletor_de.removeAllItems();
+        seletor_para.removeAllItems();
+
+        switch(categoria) {
+            case 0:
+                nome = CategoriaComprimento.nome();
+                popularSeletor_de(nome);
+                popularSeletor_para(nome);
+                break;
+            case 1:
+                nome = CategoriaArea.nome();
+                popularSeletor_de(nome);
+                popularSeletor_para(nome);
+                break;
+            case 2:
+                nome = CategoriaLiquido.nome();
+                popularSeletor_de(nome);
+                popularSeletor_para(nome);
+                break;
+            case 3:
+                nome = CategoriaMassa.nome();
+                popularSeletor_de(nome);
+                popularSeletor_para(nome);
+                break;
+        }
+    }
+
+    public double paraUnidadeBasica(double v, int i) {
+        double t;
+        switch(i) {
+            case 1:
+                t = Quilo.paraUnidadeBasica(v);
+                break;
+            case 2:
+                t = Hecto.paraUnidadeBasica(v);
+                break;
+            case 3:
+                t = Deca.paraUnidadeBasica(v);
+                break;
+            case 4:
+                t = Deci.paraUnidadeBasica(v);
+                break;
+            case 5:
+                t = Centi.paraUnidadeBasica(v);
+                break;
+            case 6:
+                t = Mili.paraUnidadeBasica(v);
+                break;
+            default:
+                t = v;
+                break;
+        }
+        return t;
+    }
+
+    public double deUnidadeBasica(double v, int i) {
+        double t;
+        switch(i) {
+            case 1:
+                t = Quilo.deUnidadeBasica(v);
+                break;
+            case 2:
+                t = Hecto.deUnidadeBasica(v);
+                break;
+            case 3:
+                t = Deca.deUnidadeBasica(v);
+                break;
+            case 4:
+                t = Deci.deUnidadeBasica(v);
+                break;
+            case 5:
+                t = Centi.deUnidadeBasica(v);
+                break;
+            case 6:
+                t = Mili.deUnidadeBasica(v);
+                break;
+            default:
+                t = v;
+                break;
+        }
+        return t;
+    }
+
+    public Object chamarClasse(String nome) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        // Precisa retornar instancia de determinada classe do Conversores
+        Class<?> a = Class.forName("Conversores."+nome);
+        Object instancia = a.newInstance();
+        return instancia;
+    }
         
-    Area area = new Area();
-    Armazenamento armazenamento = new Armazenamento();
-    Comprimento comprimento = new Comprimento();
-    Frequencia frequencia = new Frequencia();
-    Liquido liquido = new Liquido();
-    Massa massa = new Massa();
-    Pressao pressao = new Pressao();
-    Temperatura temperatura = new Temperatura();
-    Tempo tempo = new Tempo();
-    Velocidade velocidade = new Velocidade();
-
-    
     /**
      * Creates new form programa
      */
     public programa() {
         initComponents();
         this.setLocationRelativeTo(null);
+        seletor_categoria.setSelectedIndex(0);
         
-        seletor_categoria.setModel(new javax.swing.DefaultComboBoxModel(TipoMedida.values()));
+
         
-        seletor_categoria.setSelectedIndex(2);
-        valor_de.setText("0.0");
-        valor_para.setText("0.0");
         
-        valor = 1000;
-                
-        Double a = Comprimento.Quilometro.paraUnidadeBasica(Comprimento.Milimetro.deUnidadeBasica(valor));
-        
-        valorConvertido = a.toString();
-        
-        //valor_para.setText(valorConvertido);
     }
 
     /**
@@ -97,6 +176,11 @@ public class programa extends javax.swing.JFrame {
         valor_de.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         valor_de.setCursor(new java.awt.Cursor(java.awt.Cursor.N_RESIZE_CURSOR));
         valor_de.setName(""); // NOI18N
+        valor_de.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                valor_deFocusLost(evt);
+            }
+        });
         valor_de.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 valor_deActionPerformed(evt);
@@ -113,14 +197,12 @@ public class programa extends javax.swing.JFrame {
             }
         });
 
-        seletor_de.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         seletor_de.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 seletor_deActionPerformed(evt);
             }
         });
 
-        seletor_para.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         seletor_para.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 seletor_paraActionPerformed(evt);
@@ -128,7 +210,7 @@ public class programa extends javax.swing.JFrame {
         });
 
         seletor_categoria.setMaximumRowCount(10);
-        seletor_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Área", "Armazenamento de Dados", "Comprimento", "Frequência", "Líquido", "Massa", "Pressão", "Temperatura", "Tempo", "Velocidade" }));
+        seletor_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comprimento", "Área", "Líquido", "Massa" }));
         seletor_categoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 seletor_categoriaActionPerformed(evt);
@@ -137,16 +219,29 @@ public class programa extends javax.swing.JFrame {
 
         menuFile.setText("File");
 
+        menuItemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         menuItemSair.setText("Sair");
+        menuItemSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemSairActionPerformed(evt);
+            }
+        });
         menuFile.add(menuItemSair);
 
         menuBar.add(menuFile);
 
         menuAjuda.setText("Ajuda");
 
+        menuItemAjuda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         menuItemAjuda.setText("Ajuda");
+        menuItemAjuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemAjudaActionPerformed(evt);
+            }
+        });
         menuAjuda.add(menuItemAjuda);
 
+        menuItemSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         menuItemSobre.setText("Sobre");
         menuItemSobre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,26 +298,53 @@ public class programa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void valor_deActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valor_deActionPerformed
-        valor = Double.parseDouble(valor_de.getText());
+        double valor = Double.parseDouble(valor_de.getText());
+        
+        double unidadeBasica = paraUnidadeBasica(valor, seletor_de.getSelectedIndex());
+        double valorConvertido = deUnidadeBasica(unidadeBasica, seletor_para.getSelectedIndex());
+        valor_para.setText(Double.toString(valorConvertido));
+        
     }//GEN-LAST:event_valor_deActionPerformed
     private void seletor_deActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seletor_deActionPerformed
 
-        
-        converter_de = (String)seletor_de.getSelectedItem();
     }//GEN-LAST:event_seletor_deActionPerformed
     private void seletor_paraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seletor_paraActionPerformed
-        converter_para = (String)seletor_para.getSelectedItem();
+            
     }//GEN-LAST:event_seletor_paraActionPerformed
     private void valor_paraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valor_paraActionPerformed
-                valor_para.setText(valorConvertido);
+        
     }//GEN-LAST:event_valor_paraActionPerformed
     private void seletor_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seletor_categoriaActionPerformed
-        categoria = (String)seletor_categoria.getSelectedItem();
+        try {
+            popularSeletores(seletor_categoria.getSelectedIndex());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(programa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(programa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(programa.class.getName()).log(Level.SEVERE, null, ex);
+        }            
     }//GEN-LAST:event_seletor_categoriaActionPerformed
 
     private void menuItemSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSobreActionPerformed
-        // TODO add your handling code here:
+        Sobre sobre = new Sobre();
+        sobre.setVisible(true);
+        sobre.setAlwaysOnTop(true);
     }//GEN-LAST:event_menuItemSobreActionPerformed
+
+    private void menuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_menuItemSairActionPerformed
+
+    private void menuItemAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAjudaActionPerformed
+        Ajuda ajuda = new Ajuda();
+        ajuda.setVisible(true);
+        ajuda.setAlwaysOnTop(true);
+    }//GEN-LAST:event_menuItemAjudaActionPerformed
+
+    private void valor_deFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_valor_deFocusLost
+
+    }//GEN-LAST:event_valor_deFocusLost
 
     /**
      * @param args the command line arguments
@@ -249,6 +371,9 @@ public class programa extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(programa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

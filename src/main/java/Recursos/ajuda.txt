@@ -1,0 +1,5 @@
+Para converter um valor, siga os passos seguintes:
+
+1. Altere a categoria da medida que será convertida
+2. Altere as medidas desejadas nos comboBox de início e final
+3. Insira o valor no campo de texto habilitado e pressione Enter
