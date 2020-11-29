@@ -5,26 +5,19 @@ import Conversores.Comprimento;
 import Conversores.Liquido;
 import Conversores.Massa;
 import Conversores.TipoMedida;
-import java.awt.event.ItemEvent;
-import java.lang.reflect.Method;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-
 
 public class programa extends javax.swing.JFrame {
 
-    public void popularSeletor_categoria() {
+    private void popularSeletor_categoria() {
         TipoMedida[] categorias = TipoMedida.values();
         for(TipoMedida categoria : categorias) {
             seletor_categoria.addItem(categoria.getTipo());
         }
     }
     
-    public void popularSeletoresValor(int i) {        
+    private void popularSeletoresValor(int i) {        
         seletor_de.removeAllItems();
         seletor_para.removeAllItems();
-        Class[] classe;
         
         switch (i) {
             case 0:
@@ -66,15 +59,6 @@ public class programa extends javax.swing.JFrame {
         seletor_para.setSelectedIndex(1);
     }
     
-    public void calcular(double valor, String de, String para) {
-        
-    }
-    
-    public void itemStateChanged(ItemEvent e) { 
-        
-    }
-    
-    
     
     /**
      * Creates new form programa
@@ -86,8 +70,6 @@ public class programa extends javax.swing.JFrame {
         popularSeletor_categoria();
         seletor_categoria.setSelectedIndex(0);
         popularSeletoresValor(0);
-        
-        
     }
 
     /**
@@ -256,23 +238,29 @@ public class programa extends javax.swing.JFrame {
         int cat = seletor_categoria.getSelectedIndex();
         int de = seletor_de.getSelectedIndex();
         int para = seletor_para.getSelectedIndex();
+        double v = Double.parseDouble(valor_de.getText());
+        double valor=0;
         
         switch(cat) {
             case 0:
-                valor_para.setText(String.valueOf(Comprimento.values()[para].deUnidadeBasica(Comprimento.values()[de].paraUnidadeBasica(Double.parseDouble(valor_de.getText())))));
+                valor = Comprimento.values()[para].deUnidadeBasica(Comprimento.values()[de].paraUnidadeBasica(v));
                 break;
             case 1:
-                valor_para.setText(String.valueOf(Area.values()[para].deUnidadeBasica(Area.values()[de].paraUnidadeBasica(Double.parseDouble(valor_de.getText())))));
+                valor = Area.values()[para].deUnidadeBasica(Area.values()[de].paraUnidadeBasica(v));
                 break;
             case 2:
-                valor_para.setText(String.valueOf(Liquido.values()[para].deUnidadeBasica(Liquido.values()[de].paraUnidadeBasica(Double.parseDouble(valor_de.getText())))));
+                valor = Liquido.values()[para].deUnidadeBasica(Liquido.values()[de].paraUnidadeBasica(v));
                 break;
             case 3:
-                valor_para.setText(String.valueOf(Massa.values()[para].deUnidadeBasica(Massa.values()[de].paraUnidadeBasica(Double.parseDouble(valor_de.getText())))));
+                valor = Massa.values()[para].deUnidadeBasica(Massa.values()[de].paraUnidadeBasica(v));
                 break;
             default:
                 break;
         }
+        
+        
+        valor_para.setText(String.format("%6.2", String.valueOf(valor)));
+        
     }//GEN-LAST:event_valor_deActionPerformed
     private void seletor_deActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seletor_deActionPerformed
 
@@ -284,6 +272,8 @@ public class programa extends javax.swing.JFrame {
         
     }//GEN-LAST:event_valor_paraActionPerformed
     private void seletor_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seletor_categoriaActionPerformed
+        valor_de.setText("");
+        valor_para.setText("");
         popularSeletoresValor(seletor_categoria.getSelectedIndex());
     }//GEN-LAST:event_seletor_categoriaActionPerformed
 

@@ -8,12 +8,13 @@ public enum Comprimento {
     DECAMETRO("Decâmetro", "dam", 10, 0.1),
     DECIMETRO("Decímetro", "dm", 0.1, 10),
     CENTIMETRO("Centímetro", "cm", 0.01, 100),
-    MILIMETRO("Milímetro", "mm", 0.001, 1000);
+    MILIMETRO("Milímetro", "mm", 0.001, 1000),
+    MILHA("Milha", "mi", 1609, 0.00062);
     
-    private String nome;
-    private String sigla;
-    private double paraUB;
-    private double deUB;
+    private final String nome;
+    private final String sigla;
+    private final double paraUB;
+    private final double deUB;
     
     private Comprimento(String nome, String sigla, double paraUB, double deUB) {
         this.nome = nome;

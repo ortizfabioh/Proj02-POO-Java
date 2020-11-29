@@ -8,12 +8,13 @@ public enum Area {
     DECAMETROQUADRADO("Decâmetro quadrado", "dam²", 10, 0.1),
     DECIMETROQUADRADO("Decimetro quadrado", "dm²", 0.1, 10),
     CENTIMETROQUADRADO("Centímetro quadrado", "cm²", 0.01, 100),
-    MILIMETROQUADRADO("Milímetro quadrado", "mm²", 0.001, 1000);
+    MILIMETROQUADRADO("Milímetro quadrado", "mm²", 0.001, 1000),
+    HECTARE("Hectare", "ha", 10000, 0.0001);
     
-    private String nome;
-    private String sigla;
-    private double paraUB;
-    private double deUB;
+    private final String nome;
+    private final String sigla;
+    private final double paraUB;
+    private final double deUB;
     
     private Area(String nome, String sigla, double paraUB, double deUB) {
         this.nome = nome;

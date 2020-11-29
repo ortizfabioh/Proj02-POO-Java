@@ -8,12 +8,13 @@ public enum Liquido {
     DECALITRO("Decalitro", "daL", 10, 0.1),
     DECILITRO("Decilitro", "dL", 0.1, 10),
     CENTILITRO("Centilitro", "cL", 0.01, 100),
-    MILILITRO("Mililitro", "mL", 0.001, 1000);
+    MILILITRO("Mililitro", "mL", 0.001, 1000),
+    METROCUBICO("Metro cúbico", "m³", 1000, 0.001);
     
-    private String nome;
-    private String sigla;
-    private double paraUB;
-    private double deUB;
+    private final String nome;
+    private final String sigla;
+    private final double paraUB;
+    private final double deUB;
     
     private Liquido(String nome, String sigla, double paraUB, double deUB) {
         this.nome = nome;

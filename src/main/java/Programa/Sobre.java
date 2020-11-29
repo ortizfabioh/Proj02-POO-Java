@@ -1,12 +1,6 @@
 package Programa;
 
-import java.awt.Image;
-import java.io.IOException;
-import java.io.InputStream;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
 
 public class Sobre extends javax.swing.JFrame {
 
@@ -16,13 +10,15 @@ public class Sobre extends javax.swing.JFrame {
     public static final String missao = "Converter medidas utilizadas no cotidiano, que são:\nComprimento, Área, Volume de líquido e Massa";
     public static final String data = "Novembro, 2020";
     public static final String versao = "Ver. 1.0";
+    public static final String dir = "logo.GIF";
+    
+    private static final String diretorio = System.getProperty("user.dir")+"\\images\\"+dir;
     
     public Sobre() {
         initComponents();
         this.setLocationRelativeTo(null);
         
-        String dir = System.getProperty("user.dir")+"\\images\\logo.GIF";
-        imagem.setIcon(new ImageIcon(dir));
+        imagem.setIcon(new ImageIcon(diretorio));
         
         StringBuilder textoFinal = new StringBuilder();
         textoFinal.append(sysName+"\n"+versao+" - "+data+"\n\n"+missao+"\n\n"+autor+"\n\n\n"+copyRight+"\n");
