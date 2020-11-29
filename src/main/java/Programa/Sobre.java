@@ -84,6 +84,11 @@ public class Sobre extends javax.swing.JFrame {
 
         menuItemAjuda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         menuItemAjuda.setText("Ajuda");
+        menuItemAjuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemAjudaActionPerformed(evt);
+            }
+        });
         menuAjuda.add(menuItemAjuda);
 
         menuBar.add(menuAjuda);
@@ -128,6 +133,12 @@ public class Sobre extends javax.swing.JFrame {
     private void fecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharActionPerformed
         this.dispose();
     }//GEN-LAST:event_fecharActionPerformed
+
+    private void menuItemAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAjudaActionPerformed
+        Ajuda ajuda = new Ajuda();
+        ajuda.setVisible(true);
+        ajuda.setAlwaysOnTop(true);
+    }//GEN-LAST:event_menuItemAjudaActionPerformed
 
     /**
      * @param args the command line arguments

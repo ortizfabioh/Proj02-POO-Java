@@ -1,135 +1,91 @@
 package Programa;
 
-import Conversores.CategoriaArea;
-import Conversores.CategoriaComprimento;
-import Conversores.CategoriaLiquido;
-import Conversores.CategoriaMassa;
-import Conversores.Centi;
-import Conversores.Deca;
-import Conversores.Deci;
-import Conversores.Hecto;
-import Conversores.Mili;
-import Conversores.Quilo;
-import java.util.ArrayList;
+import Conversores.Area;
+import Conversores.Comprimento;
+import Conversores.Liquido;
+import Conversores.Massa;
+import Conversores.TipoMedida;
+import java.awt.event.ItemEvent;
+import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 
 public class programa extends javax.swing.JFrame {
-    ArrayList<String> nome;
 
-    public void popularSeletor_de(ArrayList<String> nome) {
-        for(int i=0; i<nome.size(); i++) {
-            seletor_de.addItem(nome.get(i));
+    public void popularSeletor_categoria() {
+        TipoMedida[] categorias = TipoMedida.values();
+        for(TipoMedida categoria : categorias) {
+            seletor_categoria.addItem(categoria.getTipo());
         }
     }
-
-    public void popularSeletor_para(ArrayList<String> nome) {
-        for(int i=0;i<nome.size(); i++) {
-            seletor_para.addItem(nome.get(i));
-
-        }
-    }
-
-    public void popularSeletores(int categoria) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    
+    public void popularSeletoresValor(int i) {        
         seletor_de.removeAllItems();
         seletor_para.removeAllItems();
-
-        switch(categoria) {
-            case 0:
-                nome = CategoriaComprimento.nome();
-                popularSeletor_de(nome);
-                popularSeletor_para(nome);
-                break;
-            case 1:
-                nome = CategoriaArea.nome();
-                popularSeletor_de(nome);
-                popularSeletor_para(nome);
-                break;
-            case 2:
-                nome = CategoriaLiquido.nome();
-                popularSeletor_de(nome);
-                popularSeletor_para(nome);
-                break;
-            case 3:
-                nome = CategoriaMassa.nome();
-                popularSeletor_de(nome);
-                popularSeletor_para(nome);
-                break;
-        }
-    }
-
-    public double paraUnidadeBasica(double v, int i) {
-        double t;
-        switch(i) {
-            case 1:
-                t = Quilo.paraUnidadeBasica(v);
-                break;
-            case 2:
-                t = Hecto.paraUnidadeBasica(v);
-                break;
-            case 3:
-                t = Deca.paraUnidadeBasica(v);
-                break;
-            case 4:
-                t = Deci.paraUnidadeBasica(v);
-                break;
-            case 5:
-                t = Centi.paraUnidadeBasica(v);
-                break;
-            case 6:
-                t = Mili.paraUnidadeBasica(v);
-                break;
-            default:
-                t = v;
-                break;
-        }
-        return t;
-    }
-
-    public double deUnidadeBasica(double v, int i) {
-        double t;
-        switch(i) {
-            case 1:
-                t = Quilo.deUnidadeBasica(v);
-                break;
-            case 2:
-                t = Hecto.deUnidadeBasica(v);
-                break;
-            case 3:
-                t = Deca.deUnidadeBasica(v);
-                break;
-            case 4:
-                t = Deci.deUnidadeBasica(v);
-                break;
-            case 5:
-                t = Centi.deUnidadeBasica(v);
-                break;
-            case 6:
-                t = Mili.deUnidadeBasica(v);
-                break;
-            default:
-                t = v;
-                break;
-        }
-        return t;
-    }
-
-    public Object chamarClasse(String nome) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        // Precisa retornar instancia de determinada classe do Conversores
-        Class<?> a = Class.forName("Conversores."+nome);
-        Object instancia = a.newInstance();
-        return instancia;
-    }
+        Class[] classe;
         
+        switch (i) {
+            case 0:
+                {
+                    Comprimento[] lista = Comprimento.values();
+                    for(Comprimento item : lista) {
+                        seletor_de.addItem(item.getNome()+" ("+item.getSigla()+")");
+                        seletor_para.addItem(item.getNome()+" ("+item.getSigla()+")");
+                    }       break;
+                }
+            case 1:
+                {
+                    Area[] lista = Area.values();
+                    for(Area item : lista) {
+                        seletor_de.addItem(item.getNome()+" ("+item.getSigla()+")");
+                        seletor_para.addItem(item.getNome()+" ("+item.getSigla()+")");
+                    }       break;
+                }
+            case 2:
+                {
+                    Liquido[] lista = Liquido.values();
+                    for(Liquido item : lista) {
+                        seletor_de.addItem(item.getNome()+" ("+item.getSigla()+")");
+                        seletor_para.addItem(item.getNome()+" ("+item.getSigla()+")");
+                    }       break;
+                }
+            case 3:
+                {
+                    Massa[] lista = Massa.values();
+                    for(Massa item : lista) {
+                        seletor_de.addItem(item.getNome()+" ("+item.getSigla()+")");
+                        seletor_para.addItem(item.getNome()+" ("+item.getSigla()+")");
+                    }       break;
+                }
+            default:
+                break;
+        }
+        seletor_de.setSelectedIndex(0);
+        seletor_para.setSelectedIndex(1);
+    }
+    
+    public void calcular(double valor, String de, String para) {
+        
+    }
+    
+    public void itemStateChanged(ItemEvent e) { 
+        
+    }
+    
+    
+    
     /**
      * Creates new form programa
      */
     public programa() {
         initComponents();
         this.setLocationRelativeTo(null);
-        seletor_categoria.setSelectedIndex(0);
         
-
+        popularSeletor_categoria();
+        seletor_categoria.setSelectedIndex(0);
+        popularSeletoresValor(0);
         
         
     }
@@ -210,7 +166,6 @@ public class programa extends javax.swing.JFrame {
         });
 
         seletor_categoria.setMaximumRowCount(10);
-        seletor_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comprimento", "Área", "Líquido", "Massa" }));
         seletor_categoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 seletor_categoriaActionPerformed(evt);
@@ -298,12 +253,26 @@ public class programa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void valor_deActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valor_deActionPerformed
-        double valor = Double.parseDouble(valor_de.getText());
+        int cat = seletor_categoria.getSelectedIndex();
+        int de = seletor_de.getSelectedIndex();
+        int para = seletor_para.getSelectedIndex();
         
-        double unidadeBasica = paraUnidadeBasica(valor, seletor_de.getSelectedIndex());
-        double valorConvertido = deUnidadeBasica(unidadeBasica, seletor_para.getSelectedIndex());
-        valor_para.setText(Double.toString(valorConvertido));
-        
+        switch(cat) {
+            case 0:
+                valor_para.setText(String.valueOf(Comprimento.values()[para].deUnidadeBasica(Comprimento.values()[de].paraUnidadeBasica(Double.parseDouble(valor_de.getText())))));
+                break;
+            case 1:
+                valor_para.setText(String.valueOf(Area.values()[para].deUnidadeBasica(Area.values()[de].paraUnidadeBasica(Double.parseDouble(valor_de.getText())))));
+                break;
+            case 2:
+                valor_para.setText(String.valueOf(Liquido.values()[para].deUnidadeBasica(Liquido.values()[de].paraUnidadeBasica(Double.parseDouble(valor_de.getText())))));
+                break;
+            case 3:
+                valor_para.setText(String.valueOf(Massa.values()[para].deUnidadeBasica(Massa.values()[de].paraUnidadeBasica(Double.parseDouble(valor_de.getText())))));
+                break;
+            default:
+                break;
+        }
     }//GEN-LAST:event_valor_deActionPerformed
     private void seletor_deActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seletor_deActionPerformed
 
@@ -315,15 +284,7 @@ public class programa extends javax.swing.JFrame {
         
     }//GEN-LAST:event_valor_paraActionPerformed
     private void seletor_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seletor_categoriaActionPerformed
-        try {
-            popularSeletores(seletor_categoria.getSelectedIndex());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(programa.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(programa.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(programa.class.getName()).log(Level.SEVERE, null, ex);
-        }            
+        popularSeletoresValor(seletor_categoria.getSelectedIndex());
     }//GEN-LAST:event_seletor_categoriaActionPerformed
 
     private void menuItemSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSobreActionPerformed
