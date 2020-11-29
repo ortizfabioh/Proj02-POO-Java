@@ -259,7 +259,7 @@ public class programa extends javax.swing.JFrame {
         }
         
         
-        valor_para.setText(String.format("%6.2", String.valueOf(valor)));
+        valor_para.setText(String.valueOf(valor));
         
     }//GEN-LAST:event_valor_deActionPerformed
     private void seletor_deActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seletor_deActionPerformed
