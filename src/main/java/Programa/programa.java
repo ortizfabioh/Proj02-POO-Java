@@ -169,7 +169,7 @@ public class programa extends javax.swing.JFrame {
             }
         });
 
-        menuFile.setText("File");
+        menuFile.setText("Arquivo");
 
         menuItemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         menuItemSair.setText("Sair");

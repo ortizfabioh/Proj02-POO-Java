@@ -63,7 +63,7 @@ public class Sobre extends javax.swing.JFrame {
 
         imagem.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
 
-        menuFile.setText("File");
+        menuFile.setText("Arquivo");
 
         menuItemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         menuItemSair.setText("Sair");
