@@ -6,6 +6,9 @@ import Conversores.Liquido;
 import Conversores.Massa;
 import Conversores.TipoMedida;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class programa extends javax.swing.JFrame {
 
     private void popularSeletor_categoria() {
@@ -59,6 +62,18 @@ public class programa extends javax.swing.JFrame {
         seletor_para.setSelectedIndex(1);
     }
     
+    public void chamarClasse(String nome) {
+        try {
+            Class classe = Class.forName(nome);
+            classe.newInstance();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(programa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(programa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(programa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     /**
      * Creates new form programa
@@ -257,7 +272,6 @@ public class programa extends javax.swing.JFrame {
             default:
                 break;
         }
-        
         
         valor_para.setText(String.valueOf(valor));
         
